@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HustlSmartAI | Upgrade Your Life</title>
+    <!-- Modern Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg: #030303;
+            --accent: #8B5CF6;
+            --accent-glow: rgba(139, 92, 246, 0.4);
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-dim: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- Background Effects --- */
+        .noise {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .gradient-sphere {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            z-index: -1;
+            filter: blur(80px);
+        }
+
+        /* --- Components --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+        }
+
+        .btn-primary {
+            background: #fff;
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        /* --- Navigation --- */
+        nav {
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding: 180px 0 100px;
+            text-align: center;
+        }
+
+        .badge {
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--accent);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            padding: 0.5rem 1.2rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            line-height: 1;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .price-tag {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            margin-top: 1rem;
+        }
+
+        /* --- Sections --- */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+            text-align: left;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* --- Bento Grid --- */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .bento-item {
+            min-height: 250px;
+        }
+
+        .bento-wide { grid-column: span 2; }
+
+        /* --- Step-based Flow --- */
+        .step-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            position: relative;
+        }
+
+        .step-card {
+            flex: 1;
+            text-align: left;
+        }
+
+        .step-num {
+            font-size: 3rem;
+            font-weight: 800;
+            opacity: 0.1;
+            margin-bottom: -1.5rem;
+            display: block;
+        }
+
+        /* --- Vision Section --- */
+        .vision-box {
+            background: linear-gradient(135deg, #111 0%, #000 100%);
+            padding: 4rem;
+            border-radius: 40px;
+            border: 1px solid var(--glass-border);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .vision-tag {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* --- Animations --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Mobile Responsive --- */
+        @media (max-width: 768px) {
+            .bento-grid { grid-template-columns: 1fr; }
+            .bento-wide { grid-column: span 1; }
+            .step-container { flex-direction: column; }
+            .vision-box { padding: 2rem; }
+            h1 { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="noise"></div>
+    <div class="gradient-sphere"></div>
+
+    <nav>
+        <div class="container nav-content">
+            <div class="logo">HustlSmartAI</div>
+            <a href="#" class="btn btn-primary" style="padding: 0.6rem 1.2rem; font-size: 0.8rem;">Join Portal</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero container reveal">
+        <div class="badge">A New Way to Human</div>
+        <h1>Don't just use AI.<br><span style="color: var(--accent);">Get paid by it.</span></h1>
+        <p>The first AI-earning ecosystem designed to turn absolute beginners into specialized AI operators in 30 days.</p>
+        
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+            <a href="#" class="btn btn-primary">Start Earning with AI <i data-lucide="arrow-right"></i></a>
+            <div class="price-tag">
+                <span style="color: #fff; font-weight: 600;">₹119</span> • Lifetime Access • Limited Entry
+            </div>
+        </div>
+    </header>
+
+    <!-- Core Philosophy -->
+    <section class="container">
+        <div class="section-header reveal">
+            <h2>The System.</h2>
+            <p>Traditional education is too slow for the AI age. We built an upgrade.</p>
+        </div>
+        <div class="bento-grid">
+            <div class="glass-card bento-wide reveal">
+                <i data-lucide="brain-circuit" style="color: var(--accent); margin-bottom: 1rem;"></i>
+                <h3>Learn from Scratch</h3>
+                <p>No coding background? No problem. We teach you the logic of prompting and automation from zero.</p>
+            </div>
+            <div class="glass-card reveal">
+                <i data-lucide="layers" style="color: var(--accent); margin-bottom: 1rem;"></i>
+                <h3>Gamified Challenges</h3>
+                <p>Complete tasks, earn "HustlPoints", and unlock exclusive earning templates.</p>
+            </div>
+            <div class="glass-card reveal">
+                <i data-lucide="coins" style="color: var(--accent); margin-bottom: 1rem;"></i>
+                <h3>Verified Paths</h3>
+                <p>Direct roadmaps for AI Content creation, Automation agencies, and Freelance services.</p>
+            </div>
+            <div class="glass-card bento-wide reveal" style="background: linear-gradient(to right, rgba(139,92,246,0.1), transparent);">
+                <i data-lucide="Zap" style="color: var(--accent); margin-bottom: 1rem;"></i>
+                <h3>The 30-Day Promise</h3>
+                <p>Our curriculum is structured to get your first AI-powered dollar within a month of starting.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works -->
+    <section style="background: #060606;">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>The Workflow.</h2>
+            </div>
+            <div class="step-container reveal">
+                <div class="step-card">
+                    <span class="step-num">01</span>
+                    <h3>Absorb</h3>
+                    <p>Short, high-signal video modules on the latest AI tools (Midjourney, ChatGPT, Zapier).</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-num">02</span>
+                    <h3>Execute</h3>
+                    <p>Build real projects in our sandbox. No theory without practice.</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-num">03</span>
+                    <h3>Deploy</h3>
+                    <p>Use our "Agency-in-a-box" kits to start offering services to global clients.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Earning Ecosystem -->
+    <section class="container">
+        <div class="glass-card reveal" style="text-align: center; border-color: rgba(6, 182, 212, 0.3);">
+            <div class="badge" style="color: #06B6D4; background: rgba(6,182,212,0.1); border-color: #06B6D4;">The Earning Paths</div>
+            <h2 style="margin-bottom: 3rem;">How you'll make it.</h2>
+            <div class="bento-grid">
+                <div style="text-align: left;">
+                    <h4 style="color: var(--accent); margin-bottom: 0.5rem;">AI Service Agency</h4>
+                    <p class="price-tag">Help businesses automate their customer support and boring data tasks.</p>
+                </div>
+                <div style="text-align: left;">
+                    <h4 style="color: var(--accent); margin-bottom: 0.5rem;">Content Machine</h4>
+                    <p class="price-tag">Build faceless YouTube/Instagram brands using 100% AI workflows.</p>
+                </div>
+                <div style="text-align: left;">
+                    <h4 style="color: var(--accent); margin-bottom: 0.5rem;">Prompt Architect</h4>
+                    <p class="price-tag">Sell custom-engineered prompts and GPTs on global marketplaces.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision 2030 -->
+    <section class="container reveal">
+        <div class="vision-box">
+            <div class="vision-tag">VISION 2030</div>
+            <h2 style="margin: 1rem 0;">We are building the <br>Sovereign Individual.</h2>
+            <p style="color: var(--text-dim); max-width: 700px; margin-bottom: 2rem;">
+                HustlSmartAI is evolving into a personalized AI mentor. By 2030, our members will have private AI labs, neural-link learning paths, and a global network of decentralized earners. This isn't a course; it's the OS for your future.
+            </p>
+            <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                <span class="price-tag"><i data-lucide="check" size="14"></i> AI-Labs Beta</span>
+                <span class="price-tag"><i data-lucide="check" size="14"></i> Smart Progress Tracking</span>
+                <span class="price-tag"><i data-lucide="check" size="14"></i> Global Talent Network</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="container reveal" style="text-align: center; padding-bottom: 150px;">
+        <h2 style="font-size: 4rem; margin-bottom: 1rem;">Ready to upgrade?</h2>
+        <p style="color: var(--text-dim); margin-bottom: 2.5rem;">Join the movement. The price will never be this low again.</p>
+        <a href="#" class="btn btn-primary" style="padding: 1.5rem 4rem; font-size: 1.2rem;">Join Now for ₹119</a>
+        
+        <div style="margin-top: 4rem; display: flex; justify-content: center; gap: 2rem; opacity: 0.4;">
+            <span style="font-size: 0.8rem;">Mobile App Coming 2024</span>
+            <span style="font-size: 0.8rem;">Exclusive Community</span>
+            <span style="font-size: 0.8rem;">Verified Certifications</span>
+        </div>
+    </section>
+
+    <footer style="padding: 2rem; border-top: 1px solid var(--glass-border); text-align: center;">
+        <div class="logo" style="font-size: 1rem; margin-bottom: 1rem;">HustlSmartAI</div>
+        <p style="font-size: 0.7rem; color: #444;">© 2024 HustlSmartAI. Not a corporate course. A survival guide for the future.</p>
+    </footer>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Reveal Animations on Scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Subtle parallax effect for the gradient sphere
+        window.addEventListener('mousemove', (e) => {
+            const sphere = document.querySelector('.gradient-sphere');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            sphere.style.transform = `translate(${x * 50}px, ${y * 50}px)`;
+        });
+    </script>
+</body>
+</html>
