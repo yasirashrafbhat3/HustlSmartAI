@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HustlSmartAI | Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root { --bg: #020202; --accent: #ccff00; --border: rgba(255,255,255,0.1); --glass: rgba(255,255,255,0.03); }
+        body { background: var(--bg); color: #fff; font-family: 'Plus Jakarta Sans'; padding: 20px; }
+        nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+        .nav-logo { font-weight: 800; letter-spacing: -1px; }
+        .glass-card { background: var(--glass); border: 1px solid var(--border); border-radius: 24px; padding: 30px; backdrop-filter: blur(10px); }
+        .dashboard-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+        .score-val { font-family: 'JetBrains Mono'; font-size: 3rem; color: var(--accent); font-weight: 800; }
+        .stat-label { font-size: 0.7rem; text-transform: uppercase; color: #555; letter-spacing: 2px; }
+        .progress-bar { height: 6px; background: #111; border-radius: 10px; margin-top: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--accent); width: 14%; }
+        .btn-world { display: block; background: #fff; color: #000; text-align: center; padding: 20px; border-radius: 15px; text-decoration: none; font-weight: 800; margin-top: 20px; }
+        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .menu-item { background: var(--glass); border: 1px solid var(--border); padding: 20px; border-radius: 15px; text-decoration: none; color: #fff; font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+        @media (max-width: 768px) { .dashboard-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-logo">HUSTL<span style="color:var(--accent)">SMART</span>AI</div>
+        <div style="font-size: 0.7rem; font-family: 'JetBrains Mono';">RT_NAGAR_NODE // ONLINE</div>
+    </nav>
+
+    <div class="dashboard-grid">
+        <div class="glass-card">
+            <div class="stat-label">Hustl Score</div>
+            <div class="score-val">0420</div>
+            <div class="stat-label" style="margin-top:20px;">Mission Progress: Day 4/30</div>
+            <div class="progress-bar"><div class="progress-fill"></div></div>
+            <a href="world.html" class="btn-world">ENTER VIRTUAL WORLD</a>
+        </div>
+        <div class="glass-card">
+            <div class="stat-label">System Status</div>
+            <div style="margin-top:10px; font-size: 0.9rem;">Rank: <span style="color:var(--accent)">Seeker</span></div>
+            <div style="margin-top:5px; font-size: 0.9rem;">Energy: 100%</div>
+            <div class="menu-grid">
+                <a href="missions.html" class="menu-item"><i data-lucide="target"></i> Missions</a>
+                <a href="earnings.html" class="menu-item"><i data-lucide="zap"></i> Earnings</a>
+                <a href="community.html" class="menu-item"><i data-lucide="users"></i> Social</a>
+                <a href="about.html" class="menu-item"><i data-lucide="info"></i> Vision</a>
+            </div>
+        </div>
+    </div>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

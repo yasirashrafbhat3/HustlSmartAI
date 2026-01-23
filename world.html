@@ -309,3 +309,48 @@
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HustlSmartAI | World Map</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root { --bg: #020202; --accent: #ccff00; --border: rgba(255,255,255,0.1); }
+        body { background: var(--bg); color: #fff; font-family: 'Plus Jakarta Sans'; overflow: hidden; }
+        .map-container { height: 100vh; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at center, #111 0%, #020202 100%); }
+        .world-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; transform: rotateX(20deg) rotateZ(-10deg); }
+        .zone-card { width: 250px; height: 350px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 20px; padding: 30px; position: relative; backdrop-filter: blur(10px); cursor: pointer; transition: 0.5s; }
+        .zone-card:hover { transform: translateY(-20px) scale(1.05); border-color: var(--accent); box-shadow: 0 0 30px rgba(204, 255, 0, 0.2); }
+        .zone-tag { font-size: 0.6rem; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; }
+        .zone-title { font-size: 1.8rem; font-weight: 800; margin-top: 10px; }
+        .locked { opacity: 0.3; cursor: not-allowed; }
+        .nav-back { position: fixed; top: 30px; left: 30px; color: #fff; text-decoration: none; font-size: 0.8rem; font-weight: 700; z-index: 100; display: flex; align-items: center; gap: 10px; }
+    </style>
+</head>
+<body>
+    <a href="dashboard.html" class="nav-back"><i data-lucide="arrow-left"></i> EXIT WORLD</a>
+    <div class="map-container">
+        <div class="world-grid">
+            <div class="zone-card" onclick="location.href='missions.html'">
+                <div class="zone-tag">Neutral Zone</div>
+                <div class="zone-title">Base<br>Camp</div>
+                <p style="font-size: 0.7rem; color: #666; margin-top: 20px;">Master AI basics, prompting, and neural logic from scratch.</p>
+            </div>
+            <div class="zone-card" onclick="location.href='earnings.html'">
+                <div class="zone-tag">Gold District</div>
+                <div class="zone-title">The<br>Market</div>
+                <p style="font-size: 0.7rem; color: #666; margin-top: 20px;">Apply AI to local businesses. Turn skills into currency.</p>
+            </div>
+            <div class="zone-card locked">
+                <div class="zone-tag">Elite Zone</div>
+                <div class="zone-title">Corporate<br>Tower</div>
+                <p style="font-size: 0.7rem; color: #666; margin-top: 20px;">Advanced enterprise automation. Restricted to Score 2000+.</p>
+            </div>
+        </div>
+    </div>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

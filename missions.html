@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HustlSmartAI | Missions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root { --bg: #020202; --accent: #ccff00; --border: rgba(255,255,255,0.1); }
+        body { background: var(--bg); color: #fff; font-family: 'Plus Jakarta Sans'; padding: 40px 5%; }
+        .mission-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
+        .node { background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 25px; border-radius: 15px; position: relative; }
+        .node.completed { border-color: var(--accent); }
+        .node.locked { opacity: 0.3; }
+        .day { font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--accent); }
+        .node-title { font-weight: 700; font-size: 0.9rem; margin-top: 5px; }
+        .status-icon { position: absolute; top: 15px; right: 15px; }
+        .nav { margin-bottom: 40px; display: flex; align-items: center; gap: 20px; }
+        .nav a { color: #fff; text-decoration: none; font-weight: 700; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+    <div class="nav"><a href="dashboard.html"><i data-lucide="arrow-left"></i> BACK</a> <h1>30-DAY MISSION</h1></div>
+    <div class="mission-grid">
+        <div class="node completed"><div class="day">DAY 01</div><div class="node-title">Neural Setup</div><div class="status-icon"><i data-lucide="check-circle" size="14" color="#ccff00"></i></div></div>
+        <div class="node completed"><div class="day">DAY 02</div><div class="node-title">Prompt Engineering I</div><div class="status-icon"><i data-lucide="check-circle" size="14" color="#ccff00"></i></div></div>
+        <div class="node"><div class="day">DAY 03</div><div class="node-title">Visual AI Mastery</div><div class="status-icon"><i data-lucide="play" size="14"></i></div></div>
+        <div class="node locked"><div class="day">DAY 04</div><div class="node-title">The SMB Blueprint</div></div>
+        <!-- Repeat for 30 days -->
+        <script>
+            for(let i=5; i<=30; i++) {
+                document.write(`<div class="node locked"><div class="day">DAY ${i < 10 ? '0'+i : i}</div><div class="node-title">Encoded Data...</div></div>`);
+            }
+        </script>
+    </div>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
