@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HustlSmartAI | Sovereign OS v2.0</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg: #020202;
+            --accent: #ccff00; /* Neon Lime */
+            --accent-glow: rgba(204, 255, 0, 0.3);
+            --cyan: #00f2ff;
+            --border: rgba(255, 255, 255, 0.1);
+            --glass: rgba(255, 255, 255, 0.03);
+            --text-dim: #888;
+            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="night"] {
+            --bg: #010103;
+            --accent: #00f2ff;
+            --accent-glow: rgba(0, 242, 255, 0.2);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--bg); color: #fff; overflow: hidden; height: 100vh; }
+
+        /* --- Boot Sequence --- */
+        #boot-screen {
+            position: fixed; inset: 0; background: #000; z-index: 9999;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            font-family: 'JetBrains Mono', monospace; transition: opacity 1s ease;
+        }
+        .boot-log { font-size: 0.8rem; color: var(--accent); margin-top: 20px; text-align: center; }
+
+        /* --- Ambient World Background --- */
+        .neural-grid {
+            position: fixed; inset: 0; z-index: -1;
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-size: 40px 40px; opacity: 0.5;
+        }
+        .glow-orb {
+            position: fixed; width: 400px; height: 400px; background: var(--accent-glow);
+            filter: blur(100px); border-radius: 50%; z-index: -1; transition: 2s;
+        }
+
+        /* --- Navigation / Radar --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 25px 5%;
+            display: flex; justify-content: space-between; align-items: center; z-index: 1000;
+        }
+        .status-pill {
+            background: var(--glass); border: 1px solid var(--border);
+            padding: 8px 16px; border-radius: 100px; font-size: 0.7rem; font-weight: 800;
+            display: flex; align-items: center; gap: 8px; backdrop-filter: blur(10px);
+        }
+        .pulse-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+
+        /* --- World Map Interface --- */
+        #map-container {
+            height: 100vh; display: flex; align-items: center; justify-content: center;
+            perspective: 1000px; transition: var(--transition);
+        }
+        .world-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;
+            transform: rotateX(20deg) rotateZ(-10deg); transition: var(--transition);
+        }
+
+        .zone-card {
+            width: 280px; height: 380px; background: var(--glass);
+            border: 1px solid var(--border); border-radius: 30px;
+            padding: 40px; cursor: pointer; position: relative;
+            backdrop-filter: blur(20px); transition: var(--transition);
+            display: flex; flex-direction: column; justify-content: flex-end;
+        }
+        .zone-card:hover {
+            transform: translateY(-20px) scale(1.05); border-color: var(--accent);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 20px var(--accent-glow);
+        }
+        .zone-locked { opacity: 0.4; cursor: not-allowed; }
+        .zone-card i { position: absolute; top: 40px; right: 40px; color: var(--accent); opacity: 0.5; }
+        .zone-tag { font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+        .zone-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 10px; line-height: 1; }
+        .zone-desc { font-size: 0.8rem; color: var(--text-dim); }
+
+        /* --- Task / Modal System --- */
+        #zone-view {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(30px); z-index: 2000; display: none;
+            padding: 5% 10%; overflow-y: auto;
+        }
+        .back-btn { cursor: pointer; color: var(--accent); font-weight: 800; margin-bottom: 30px; display: inline-flex; align-items: center; gap: 10px; }
+
+        .quest-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; }
+        .quest-item {
+            background: var(--glass); border: 1px solid var(--border);
+            padding: 25px; border-radius: 20px; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quest-info h4 { margin-bottom: 5px; }
+        .reward { color: var(--accent); font-weight: 800; font-size: 0.9rem; }
+
+        /* --- Footer Stats --- */
+        .footer-hud {
+            position: fixed; bottom: 30px; left: 5%; right: 5%;
+            display: flex; justify-content: space-between; align-items: flex-end; z-index: 1000;
+        }
+        .hud-stat { text-align: right; }
+        .hud-label { font-size: 0.6rem; color: var(--text-dim); font-weight: 800; text-transform: uppercase; }
+        .hud-value { font-size: 1.8rem; font-weight: 800; font-family: 'JetBrains Mono'; color: var(--accent); }
+
+        @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.5); opacity: 0.5; } 100% { transform: scale(1); opacity: 1; } }
+
+        /* --- Mobile Responsiveness --- */
+        @media (max-width: 768px) {
+            .world-grid { grid-template-columns: 1fr; transform: none; padding: 100px 0; overflow-y: auto; }
+            #map-container { overflow-y: auto; align-items: flex-start; }
+            .quest-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body data-theme="day">
+
+    <!-- Ambient Grid -->
+    <div class="neural-grid"></div>
+    <div class="glow-orb" id="orb-1" style="top: 10%; left: 10%;"></div>
+    <div class="glow-orb" id="orb-2" style="bottom: 10%; right: 10%;"></div>
+
+    <!-- Boot Sequence -->
+    <div id="boot-screen">
+        <div class="logo" style="font-size: 2rem; font-weight: 800;">HUSTL<span style="color:var(--accent)">SMART</span>AI</div>
+        <div class="boot-log" id="boot-log">INITIALIZING NEURAL INTERFACE...</div>
+    </div>
+
+    <!-- Navigation Header -->
+    <nav>
+        <div class="logo" style="font-weight: 800; letter-spacing: -1px;">HUSTL<span style="color:var(--accent)">SMART</span>AI</div>
+        <div style="display: flex; gap: 15px;">
+            <div class="status-pill">
+                <div class="pulse-dot"></div>
+                LOC: <span id="user-city">SCANNING...</span>
+            </div>
+            <div class="status-pill">
+                <i data-lucide="zap" size="14"></i>
+                ENERGY: 100%
+            </div>
+        </div>
+    </nav>
+
+    <!-- World Map -->
+    <main id="map-container">
+        <div class="world-grid">
+            <!-- Zone 0 -->
+            <div class="zone-card" onclick="openZone('base-camp')">
+                <i data-lucide="home" size="30"></i>
+                <div class="zone-tag">Neutral Zone</div>
+                <h2 class="zone-title">Base Camp</h2>
+                <p class="zone-desc">The birthplace of legends. Master AI basics & prompting secrets.</p>
+            </div>
+
+            <!-- Zone 1 -->
+            <div class="zone-card" onclick="openZone('business-district')">
+                <i data-lucide="shopping-bag" size="30"></i>
+                <div class="zone-tag">Earning District</div>
+                <h2 class="zone-title">The Market</h2>
+                <p class="zone-desc">Solve problems for local shops. Build AI bots for RT Nagar cafes.</p>
+            </div>
+
+            <!-- Zone 2 -->
+            <div class="zone-card zone-locked" onclick="alert('Master the basics to unlock the Tower.')">
+                <i data-lucide="lock" size="30"></i>
+                <div class="zone-tag">Corporate Zone</div>
+                <h2 class="zone-title">The Tower</h2>
+                <p class="zone-desc">Unlock high-ticket automation for company executives globally.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Zone Content View (Modal) -->
+    <div id="zone-view">
+        <div class="back-btn" onclick="closeZone()"><i data-lucide="arrow-left"></i> BACK TO MAP</div>
+        <h1 id="view-title" style="font-size: 4rem; font-weight: 800;">Zone Name</h1>
+        <p id="view-desc" style="color: var(--text-dim); max-width: 600px; margin-top: 10px;"></p>
+
+        <div class="quest-grid" id="quest-list">
+            <!-- Dynamic Quests -->
+        </div>
+    </div>
+
+    <!-- HUD Footer -->
+    <div class="footer-hud">
+        <div>
+            <div class="hud-label">Sovereign OS Status</div>
+            <div style="font-family: 'JetBrains Mono'; font-size: 0.7rem; opacity: 0.5;">v2.0.45_PROD_READY</div>
+        </div>
+        <div class="hud-stat">
+            <div class="hud-label">Current Hustl Score</div>
+            <div class="hud-value" id="hustl-score">0000</div>
+        </div>
+    </div>
+
+    <script>
+        // --- Boot Animation ---
+        const logMessages = [
+            "CONNECTING TO GLOBAL NODES...",
+            "CALIBRATING AI MODELS...",
+            "MAPPING EARNING PATHWAYS...",
+            "SYNCING WITH LOCAL HUB...",
+            "ACCESS GRANTED."
+        ];
+        
+        let msgIndex = 0;
+        const bootInterval = setInterval(() => {
+            document.getElementById('boot-log').innerText = logMessages[msgIndex];
+            msgIndex++;
+            if(msgIndex === logMessages.length) {
+                clearInterval(bootInterval);
+                setTimeout(() => {
+                    document.getElementById('boot-screen').style.opacity = '0';
+                    setTimeout(() => document.getElementById('boot-screen').style.display = 'none', 1000);
+                }, 1000);
+            }
+        }, 600);
+
+        // --- Geolocation & Day/Night Logic ---
+        function updateWorldState() {
+            // Geolocation
+            if(navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(pos => {
+                    // In a real app, use an API to reverse geocode. For now:
+                    document.getElementById('user-city').innerText = "INDIA_NODE";
+                }, () => {
+                    document.getElementById('user-city').innerText = "GLOBAL_HUB";
+                });
+            }
+
+            // Theme Switch based on time
+            const hour = new Date().getHours();
+            if(hour < 6 || hour > 18) {
+                document.body.setAttribute('data-theme', 'night');
+            }
+        }
+        updateWorldState();
+
+        // --- World Map Navigation ---
+        const zoneData = {
+            'base-camp': {
+                title: "Base Camp",
+                desc: "Every master was once a beginner. Unlock your first AI tool here.",
+                quests: [
+                    { name: "Neural Seed: Prompting 101", reward: "Level 1 Operator" },
+                    { name: "Ghostwriting with AI", reward: "Content Badge" },
+                    { name: "Visual Mastery: AI Art", reward: "Design Skill" }
+                ]
+            },
+            'business-district': {
+                title: "The Market",
+                desc: "Where AI meets real money. Build solutions for small businesses.",
+                quests: [
+                    { name: "The RT Nagar Cafe Bot", reward: "₹500 / Project" },
+                    { name: "Automated Shop Manager", reward: "₹1200 / Project" },
+                    { name: "Local SEO Optimizer", reward: "₹2000 / Project" }
+                ]
+            }
+        };
+
+        function openZone(id) {
+            const data = zoneData[id];
+            if(!data) return;
+
+            document.getElementById('view-title').innerText = data.title;
+            document.getElementById('view-desc').innerText = data.desc;
+            
+            const questList = document.getElementById('quest-list');
+            questList.innerHTML = '';
+            data.quests.forEach(q => {
+                questList.innerHTML += `
+                    <div class="quest-item">
+                        <div class="quest-info">
+                            <h4>${q.name}</h4>
+                            <p style="font-size: 0.7rem; color: var(--text-dim);">30-Day Path: Step 1</p>
+                        </div>
+                        <div class="reward">${q.reward}</div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('zone-view').style.display = 'block';
+            document.getElementById('map-container').style.transform = 'scale(0.8) rotateX(10deg)';
+        }
+
+        function closeZone() {
+            document.getElementById('zone-view').style.display = 'none';
+            document.getElementById('map-container').style.transform = 'scale(1) rotateX(0deg)';
+        }
+
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Subtle Orb Motion
+        window.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            document.getElementById('orb-1').style.transform = `translate(${x * 50}px, ${y * 50}px)`;
+            document.getElementById('orb-2').style.transform = `translate(${x * -30}px, ${y * -30}px)`;
+        });
+    </script>
+</body>
+</html>
