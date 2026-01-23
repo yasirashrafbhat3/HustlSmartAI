@@ -159,7 +159,6 @@
     </style>
 </head>
 <body>
-
     <div class="ambient-glow"></div>
 
     <div class="login-card">
@@ -220,5 +219,33 @@
             }, 800);
         }
     </script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup } 
+        from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
+      
+        const firebaseConfig = {
+            apiKey: "AIzaSyDcflShYG-qmA4043K74rVodFtJh8ldbdM",
+authDomain: "hustlsmartai.firebaseapp.com",
+projectId: "hustlsmartai",
+storageBucket: "hustlsmartai.firebasestorage.app",
+messagingSenderId: "586304389093",
+appId: "1:586304389093:web:93f35d85189250746ab90c"
+        };
+      
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+      
+        const googleBtn = document.getElementById("google-login");
+      
+        googleBtn.addEventListener("click", () => {
+          const provider = new GoogleAuthProvider();
+          signInWithPopup(auth, provider)
+            .then(() => {
+              window.location.href = "dashboard.html";
+            })
+            .catch(err => alert(err.message));
+        });
+      </script>       
 </body>
 </html>
