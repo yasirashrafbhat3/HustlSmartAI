@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HustlSmartAI | Courses</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:#020202;
+      --accent:#ccff00;
+      --border:rgba(255,255,255,0.1);
+      --glass:rgba(255,255,255,0.04);
+      --text-dim:#888;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Plus Jakarta Sans',sans-serif}
+    body{background:var(--bg);color:#fff;padding:40px}
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:50px;
+    }
+    .logo{font-weight:800;font-size:1.2rem}
+    .logo span{color:var(--accent)}
+
+    .courses{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:30px;
+    }
+
+    .course-card{
+      background:var(--glass);
+      border:1px solid var(--border);
+      border-radius:24px;
+      padding:30px;
+      transition:0.4s;
+    }
+    .course-card:hover{
+      transform:translateY(-10px);
+      border-color:var(--accent);
+    }
+
+    .tag{
+      font-size:0.7rem;
+      color:var(--accent);
+      font-weight:700;
+      letter-spacing:2px;
+      margin-bottom:10px;
+      text-transform:uppercase;
+    }
+
+    h2{font-size:1.6rem;margin-bottom:10px}
+    p{color:var(--text-dim);font-size:0.95rem;margin-bottom:20px}
+
+    ul{font-size:0.85rem;color:#aaa;margin-bottom:25px}
+    ul li{margin-bottom:6px}
+
+    .btn{
+      display:inline-block;
+      padding:14px 24px;
+      border-radius:100px;
+      background:var(--accent);
+      color:#000;
+      font-weight:800;
+      text-decoration:none;
+      font-size:0.85rem;
+    }
+
+    footer{
+      margin-top:60px;
+      font-size:0.7rem;
+      color:#555;
+      text-align:center;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">HUSTL<span>SMART</span>AI</div>
+  <a href="dashboard.html" style="color:#888;font-size:0.8rem">← Back to Dashboard</a>
+</header>
+
+<section class="courses">
+
+  <!-- COURSE 1 -->
+  <div class="course-card">
+    <div class="tag">30-Day Mission</div>
+    <h2>AI Freelancer Starter</h2>
+    <p>Go from zero to earning by selling AI services to small businesses.</p>
+
+    <ul>
+      <li>✔ Prompt engineering from scratch</li>
+      <li>✔ AI content & automation services</li>
+      <li>✔ Client outreach & pricing</li>
+      <li>✔ First paid project in 30 days</li>
+    </ul>
+
+    <a href="course.html?course=freelancer" class="btn">Explore Course</a>
+  </div>
+
+  <!-- COURSE 2 -->
+  <div class="course-card">
+    <div class="tag">Professional Track</div>
+    <h2>AI for Employees</h2>
+    <p>Learn how to sell AI productivity & automation inside companies.</p>
+
+    <ul>
+      <li>✔ AI for office work & workflows</li>
+      <li>✔ Automation with ChatGPT & tools</li>
+      <li>✔ Selling AI internally to teams</li>
+      <li>✔ Career & salary leverage</li>
+    </ul>
+
+    <a href="course.html?course=employee" class="btn">Explore Course</a>
+  </div>
+
+</section>
+
+<footer>
+  HustlSmartAI • Learn → Build → Earn
+</footer>
+
+</body>
+</html>
