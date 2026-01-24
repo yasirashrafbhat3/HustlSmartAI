@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HustlSmartAI | Courses</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #020202;
+      color: #fff;
+    }
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 80px 20px;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #aaa;
+      max-width: 700px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 30px;
+      margin-top: 60px;
+    }
+    .card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 30px;
+      transition: 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: #ccff00;
+    }
+    .tag {
+      color: #ccff00;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+    .price {
+      font-size: 1.2rem;
+      color: #ccff00;
+      margin: 20px 0;
+      font-weight: 800;
+    }
+    ul {
+      padding-left: 18px;
+      color: #bbb;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 14px 28px;
+      border-radius: 999px;
+      background: #ccff00;
+      color: #000;
+      font-weight: 800;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Choose your path</h1>
+    <p>Explore everything first. Learn → Practice → Earn.  
+       No pressure. Full transparency.</p>
+
+    <div class="grid">
+      <!-- Course 1 -->
+      <div class="card">
+        <div class="tag">30-DAY CORE PATH</div>
+        <h2>AI Foundations + Freelancing</h2>
+        <p>From zero → paid AI services.</p>
+        <div class="price">₹119 (included)</div>
+        <ul>
+          <li>Prompt engineering from scratch</li>
+          <li>AI tools (ChatGPT, image, automation)</li>
+          <li>Service ideas for small businesses</li>
+          <li>How to get first client</li>
+          <li>Daily missions & tasks</li>
+        </ul>
+        <a href="login.html" class="btn">Unlock via Login</a>
+      </div>
+
+      <!-- Course 2 -->
+      <div class="card">
+        <div class="tag">PRO TRACK</div>
+        <h2>AI for Employees & Corporates</h2>
+        <p>Sell AI productivity to working professionals.</p>
+        <div class="price">₹119 (included)</div>
+        <ul>
+          <li>AI for office workflows</li>
+          <li>Automation for emails, reports</li>
+          <li>Pitch AI to employees & teams</li>
+          <li>High-trust use cases</li>
+          <li>Repeat income model</li>
+        </ul>
+        <a href="login.html" class="btn">Unlock via Login</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
