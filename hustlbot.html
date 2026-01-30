@@ -1,0 +1,215 @@
+<!-- HustlBot Widget Start -->
+<style>
+    :root {
+        --h-neon: #ccff00;
+        --h-bg: #0a0a0a;
+        --h-card: #141414;
+        --h-text: #ffffff;
+        --h-dim: #888888;
+        --h-border: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Floating Bubble */
+    #hustl-bubble {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        width: 60px;
+        height: 60px;
+        background: var(--h-neon);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 10000;
+        box-shadow: 0 0 25px rgba(204, 255, 0, 0.4);
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    #hustl-bubble:hover { transform: scale(1.1); }
+    #hustl-bubble svg { width: 30px; height: 30px; color: #000; }
+
+    /* Chat Panel */
+    #hustl-panel {
+        position: fixed;
+        bottom: 100px;
+        right: 25px;
+        width: 360px;
+        max-width: calc(100vw - 50px);
+        height: 520px;
+        max-height: calc(100vh - 150px);
+        background: var(--h-bg);
+        border: 1px solid var(--h-border);
+        border-radius: 24px;
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        z-index: 10001;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        animation: hustl-slide 0.4s ease forwards;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    @keyframes hustl-slide {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Header */
+    .hp-header {
+        padding: 20px;
+        background: var(--h-card);
+        border-bottom: 1px solid var(--h-border);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .hp-avatar { width: 35px; height: 35px; background: var(--h-neon); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; font-weight: 800; font-size: 12px; }
+    .hp-header-info h4 { margin: 0; font-size: 15px; color: var(--h-text); }
+    .hp-header-info span { font-size: 11px; color: var(--h-neon); font-weight: 600; }
+
+    /* Messages Area */
+    #hp-chat {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        scrollbar-width: none;
+    }
+
+    .h-msg { max-width: 80%; padding: 12px 16px; border-radius: 18px; font-size: 13.5px; line-height: 1.5; }
+    .h-msg-bot { background: var(--h-card); color: var(--h-text); align-self: flex-start; border-bottom-left-radius: 4px; }
+    .h-msg-user { background: var(--h-neon); color: #000; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 600; }
+
+    /* Quick Replies */
+    .hp-replies { padding: 10px 15px; display: flex; flex-wrap: wrap; gap: 8px; background: var(--h-bg); border-top: 1px solid var(--h-border); }
+    .hp-qr { background: rgba(255,255,255,0.05); border: 1px solid var(--h-border); color: var(--h-text); padding: 7px 12px; border-radius: 100px; font-size: 11px; cursor: pointer; transition: 0.2s; }
+    .hp-qr:hover { border-color: var(--h-neon); color: var(--h-neon); }
+
+    /* Input Area */
+    .hp-input-wrap { padding: 15px 20px; display: flex; gap: 10px; background: var(--h-card); }
+    #hp-input { flex: 1; background: transparent; border: none; color: var(--h-text); font-size: 14px; outline: none; }
+    #hp-send { background: transparent; border: none; color: var(--h-neon); cursor: pointer; display: flex; align-items: center; }
+
+    /* Mobile */
+    @media (max-width: 480px) {
+        #hustl-panel { right: 0; bottom: 0; width: 100vw; height: 100vh; max-height: 100vh; border-radius: 0; }
+    }
+</style>
+
+<div id="hustl-panel">
+    <div class="hp-header">
+        <div class="hp-avatar">HB</div>
+        <div class="hp-header-info">
+            <h4>HustlBot</h4>
+            <span>Online • AI Mentor</span>
+        </div>
+        <div id="hustl-close" style="margin-left: auto; cursor: pointer; opacity: 0.5;"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"></path></svg></div>
+    </div>
+    <div id="hp-chat"></div>
+    <div class="hp-replies">
+        <div class="hp-qr" onclick="botSpeak('What should I do now?')">What to do? 🎯</div>
+        <div class="hp-qr" onclick="botSpeak('How do I earn money?')">Earning path 💰</div>
+        <div class="hp-qr" onclick="botSpeak('I feel confused')">Confused 😕</div>
+        <div class="hp-qr" onclick="botSpeak('Button not working')">Tech help 🛠️</div>
+    </div>
+    <div class="hp-input-wrap">
+        <input type="text" id="hp-input" placeholder="Ask me about AI or money..." autocomplete="off">
+        <button id="hp-send"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"></path></svg></button>
+    </div>
+</div>
+
+<div id="hustl-bubble">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path></svg>
+</div>
+
+<script>
+    const hustlBubble = document.getElementById('hustl-bubble');
+    const hustlPanel = document.getElementById('hustl-panel');
+    const hustlClose = document.getElementById('hustl-close');
+    const hpInput = document.getElementById('hp-input');
+    const hpSend = document.getElementById('hp-send');
+    const hpChat = document.getElementById('hp-chat');
+
+    const responses = {
+        greeting: ["Yo! I'm HustlBot. Ready to secure the bag?", "Access granted. How can I help you dominate today?", "HustlSmartAI active. What's the move?"],
+        money: ["Course 1 is for those first ₹500-₹2000 wins. Course 2 is where we hit ₹50k/month by helping businesses.", "Focus on value. If you save a business owner 5 hours a week using AI, they'll happily pay you.", "Start with simple services: Bio writing, Resume fixing, IG captions. It's the fastest way to your first rupee."],
+        tech: ["Page not loading? Give it a hard refresh (Ctrl+F5).", "Button stuck? Check if your internet node is active.", "If your progress isn't saving, make sure you aren't in Incognito mode. We use localStorage."],
+        stuck: ["Take a breath. Re-read the 'Learn' card. AI is just logic. You've got this.", "Confidence is built by doing. Don't worry about being perfect. Just finish the 'Do Now' task.", "Confused? That just means your brain is upgrading. Keep pushing."],
+        prompt: ["Treat ChatGPT like a smart intern. Be specific. Tell it who to 'Act As'.", "Try this: 'Act as a professional marketer. I need 5 hook-heavy captions for [Topic].'", "The better your context, the better the output. Context is king."],
+        default: ["I hear you. But let's stay focused on the mission. Ask me about your lesson, earnings, or AI hacks."]
+    };
+
+    function botSpeak(text, isUser = true) {
+        if(isUser) {
+            appendMsg(text, 'user');
+            processInput(text);
+        } else {
+            setTimeout(() => appendMsg(text, 'bot'), 500);
+        }
+    }
+
+    function appendMsg(text, type) {
+        const div = document.createElement('div');
+        div.className = `h-msg h-msg-${type}`;
+        div.innerText = text;
+        hpChat.appendChild(div);
+        hpChat.scrollTop = hpChat.scrollHeight;
+        
+        // Save to history
+        localStorage.setItem('hb_history', hpChat.innerHTML);
+    }
+
+    function processInput(input) {
+        const val = input.toLowerCase();
+        const params = new URLSearchParams(window.location.search);
+        const day = params.get('day');
+
+        let reply = "";
+
+        if(val.includes("do today") || val.includes("now")) {
+            reply = day ? `You're on Day ${day}. Open the 'Do Now' box and complete that task. No excuses!` : "Pick a Course from the World Map and start your Day 1 mission.";
+        } else if(val.includes("money") || val.includes("earn") || val.includes("₹")) {
+            reply = responses.money[Math.floor(Math.random() * responses.money.length)];
+        } else if(val.includes("confused") || val.includes("help") || val.includes("scared")) {
+            reply = responses.stuck[Math.floor(Math.random() * responses.stuck.length)];
+        } else if(val.includes("work") || val.includes("broken") || val.includes("error")) {
+            reply = responses.tech[Math.floor(Math.random() * responses.tech.length)];
+        } else if(val.includes("prompt") || val.includes("chatgpt")) {
+            reply = responses.prompt[Math.floor(Math.random() * responses.prompt.length)];
+        } else {
+            reply = responses.default[0];
+        }
+
+        botSpeak(reply, false);
+    }
+
+    hustlBubble.onclick = () => hustlPanel.style.display = 'flex';
+    hustlClose.onclick = () => hustlPanel.style.display = 'none';
+
+    hpSend.onclick = () => {
+        if(!hpInput.value.trim()) return;
+        botSpeak(hpInput.value);
+        hpInput.value = "";
+    };
+
+    hpInput.onkeypress = (e) => {
+        if(e.key === 'Enter') hpSend.click();
+    };
+
+    // Initialize History or Welcome
+    window.onload = () => {
+        const history = localStorage.getItem('hb_history');
+        if(history) {
+            hpChat.innerHTML = history;
+            hpChat.scrollTop = hpChat.scrollHeight;
+        } else {
+            botSpeak(responses.greeting[Math.floor(Math.random() * responses.greeting.length)], false);
+        }
+    };
+</script>
+<!-- HustlBot Widget End -->

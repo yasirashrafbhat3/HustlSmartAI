@@ -1,703 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>HustlSmartAI | Courses</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background: #020202;
-      color: #fff;
-    }
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 80px 20px;
-    }
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-    }
-    p {
-      color: #aaa;
-      max-width: 700px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-      gap: 30px;
-      margin-top: 60px;
-    }
-    .card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 20px;
-      padding: 30px;
-      transition: 0.3s;
-    }
-    .card:hover {
-      transform: translateY(-8px);
-      border-color: #ccff00;
-    }
-    .tag {
-      color: #ccff00;
-      font-size: 0.75rem;
-      letter-spacing: 2px;
-      margin-bottom: 10px;
-    }
-    .price {
-      font-size: 1.2rem;
-      color: #ccff00;
-      margin: 20px 0;
-      font-weight: 800;
-    }
-    ul {
-      padding-left: 18px;
-      color: #bbb;
-    }
-    li {
-      margin-bottom: 8px;
-    }
-    .btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 14px 28px;
-      border-radius: 999px;
-      background: #ccff00;
-      color: #000;
-      font-weight: 800;
-      text-decoration: none;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="container">
-    <h1>Choose your path</h1>
-    <p>Explore everything first. Learn → Practice → Earn.  
-       No pressure. Full transparency.</p>
-
-    <div class="grid">
-      <!-- Course 1 -->
-      <div class="card">
-        <div class="tag">30-DAY CORE PATH</div>
-        <h2>AI Foundations + Freelancing</h2>
-        <p>From zero → paid AI services.</p>
-        <div class="price">₹119 (included)</div>
-        <ul>
-          <li>Prompt engineering from scratch</li>
-          <li>AI tools (ChatGPT, image, automation)</li>
-          <li>Service ideas for small businesses</li>
-          <li>How to get first client</li>
-          <li>Daily missions & tasks</li>
-        </ul>
-        <a href="login.html" class="btn">Unlock via Login</a>
-      </div>
-
-      <!-- Course 2 -->
-      <div class="card">
-        <div class="tag">PRO TRACK</div>
-        <h2>AI for Employees & Corporates</h2>
-        <p>Sell AI productivity to working professionals.</p>
-        <div class="price">₹119 (included)</div>
-        <ul>
-          <li>AI for office workflows</li>
-          <li>Automation for emails, reports</li>
-          <li>Pitch AI to employees & teams</li>
-          <li>High-trust use cases</li>
-          <li>Repeat income model</li>
-        </ul>
-        <a href="login.html" class="btn">Unlock via Login</a>
-      </div>
-    </div>
-  </div>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HustlSmartAI | Neural Training OS</title>
-    <script src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Course Engine | HustlSmartAI</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #000000;
-            --card: #0a0a0a;
-            --accent: #ccff00; /* Neon Lime */
-            --accent-soft: rgba(204, 255, 0, 0.1);
-            --border: rgba(255, 255, 255, 0.1);
+            --bg: #050505;
+            --card: #121212;
+            --accent: #ccff00;
             --text-main: #ffffff;
-            --text-dim: #86868b;
-            --glass: rgba(255, 255, 255, 0.03);
-            --error: #ff3b30;
+            --text-dim: #a1a1aa;
+            --border: rgba(255, 255, 255, 0.1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-font-smoothing: antialiased;
-            -webkit-tap-highlight-color: transparent;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
-            background: var(--bg);
+            background-color: var(--bg);
             color: var(--text-main);
             font-family: 'Plus Jakarta Sans', sans-serif;
-            overflow-x: hidden;
+            line-height: 1.6;
             display: flex;
             justify-content: center;
         }
 
-        /* --- OS Container --- */
-        #os-shell {
+        #app-container {
             width: 100%;
             max-width: 500px;
             min-height: 100vh;
-            padding: 24px 24px 140px 24px;
-            position: relative;
+            padding: 20px;
+            padding-bottom: 120px;
         }
 
-        /* --- Navigation --- */
-        nav {
+        /* --- Header --- */
+        header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 32px;
+            margin-bottom: 30px;
         }
 
-        .back-btn {
-            background: var(--glass);
-            border: 1px solid var(--border);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 100px;
-            font-size: 0.8rem;
+        .back-link {
+            color: var(--text-dim);
             text-decoration: none;
+            font-size: 0.9rem;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
 
-        .os-status {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-dim);
-            font-weight: 600;
-        }
-
-        /* --- Mission Header --- */
-        .day-indicator {
+        .day-badge {
+            background: var(--accent);
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-weight: 800;
             font-size: 0.8rem;
-            font-weight: 800;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 8px;
-            display: block;
         }
 
-        h1 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            letter-spacing: -1.5px;
-            line-height: 1.1;
-            margin-bottom: 24px;
-        }
+        /* --- Lesson Content --- */
+        h1 { font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; line-height: 1.2; }
+        .course-title { color: var(--accent); font-size: 0.8rem; text-transform: uppercase; font-weight: 800; margin-bottom: 20px; display: block; }
 
-        /* --- Mission Card --- */
-        .mission-card {
-            background: var(--glass);
+        .section-card {
+            background: var(--card);
             border: 1px solid var(--border);
-            border-left: 4px solid var(--accent);
-            padding: 20px;
-            border-radius: 4px 16px 16px 4px;
-            margin-bottom: 32px;
-            position: relative;
-        }
-
-        .mission-card::after {
-            content: 'TOP SECRET';
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 0.5rem;
-            color: var(--accent);
-            opacity: 0.3;
-            letter-spacing: 1px;
-        }
-
-        .section-label {
-            font-size: 0.7rem;
-            font-weight: 800;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .mission-text {
-            font-size: 1.05rem;
-            font-weight: 600;
-            line-height: 1.4;
-        }
-
-        /* --- Content Sections --- */
-        .content-block {
-            margin-bottom: 32px;
-        }
-
-        .learn-body {
-            font-size: 1rem;
-            color: #d1d1d6;
-            line-height: 1.6;
-        }
-
-        .do-now-card {
-            background: var(--accent-soft);
-            border: 1px solid var(--accent);
-            padding: 24px;
             border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
         }
 
-        .do-now-card h3 {
-            font-size: 0.9rem;
-            color: var(--accent);
-            margin-bottom: 12px;
+        .label {
             display: flex;
             align-items: center;
             gap: 8px;
-        }
-
-        .result-line {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-top: 24px;
-            padding-top: 16px;
-            border-top: 1px solid var(--border);
-            font-size: 0.9rem;
-            color: var(--text-dim);
-        }
-
-        /* --- Badges & XP --- */
-        .skill-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: #fff;
-            color: #000;
-            padding: 6px 14px;
-            border-radius: 100px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 800;
-            margin-bottom: 32px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            margin-bottom: 10px;
         }
 
-        /* --- HUD (Bottom Fixed Bar) --- */
-        .os-hud {
+        .label i { color: var(--accent); width: 14px; }
+
+        .content-text { font-size: 1rem; color: #e4e4e7; }
+        .highlight-box { background: rgba(204, 255, 0, 0.05); border: 1px dashed var(--accent); padding: 15px; border-radius: 12px; margin-top: 10px; }
+
+        /* --- Fixed Footer --- */
+        .footer-nav {
             position: fixed;
             bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
             width: 100%;
             max-width: 500px;
-            background: rgba(0,0,0,0.85);
-            backdrop-filter: blur(20px);
-            padding: 20px 24px 30px 24px;
+            padding: 20px;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(15px);
             border-top: 1px solid var(--border);
-            z-index: 1000;
-        }
-
-        .hud-stats {
             display: flex;
-            justify-content: space-between;
-            margin-bottom: 12px;
+            gap: 15px;
         }
 
-        .stat-group span {
-            display: block;
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            color: var(--text-dim);
-            font-weight: 800;
-        }
-
-        .stat-group b {
-            font-size: 0.9rem;
-            color: var(--accent);
-        }
-
-        .xp-container {
-            width: 100%;
-            height: 6px;
-            background: var(--glass);
-            border-radius: 10px;
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
-
-        .xp-fill {
-            height: 100%;
-            background: var(--accent);
-            width: 0%;
-            transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .action-btn {
-            width: 100%;
-            background: var(--text-main);
-            color: black;
-            border: none;
-            padding: 18px;
-            border-radius: 16px;
+        .btn {
+            flex: 1;
+            padding: 16px;
+            border-radius: 14px;
             font-weight: 800;
             font-size: 1rem;
+            border: none;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            transition: transform 0.2s, background 0.2s;
+            transition: 0.2s;
         }
 
-        .action-btn:hover {
-            background: var(--accent);
-        }
+        .btn-secondary { background: #1a1a1a; color: #fff; }
+        .btn-primary { background: var(--accent); color: #000; }
+        .btn:active { transform: scale(0.96); }
 
-        .action-btn:active {
-            transform: scale(0.97);
-        }
-
-        /* --- State Views --- */
-        #not-found {
+        /* --- Error Screen --- */
+        #error-screen {
             display: none;
             text-align: center;
             padding-top: 100px;
         }
-
-        .error-icon { color: var(--error); margin-bottom: 20px; }
-
-        /* --- Animations --- */
-        .fade-in {
-            animation: fadeIn 0.6s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- Confidence Meter --- */
-        .conf-meter {
-            height: 4px;
-            width: 40px;
-            background: var(--glass);
-            border-radius: 10px;
-            display: inline-block;
-            vertical-align: middle;
-            margin-left: 8px;
-            overflow: hidden;
-        }
-        .conf-fill {
-            height: 100%;
-            background: var(--accent);
-        }
+        #error-screen i { color: var(--accent); margin-bottom: 20px; }
     </style>
 </head>
 <body>
 
-<div id="os-shell">
-    <nav>
-        <a href="index.html" class="back-btn"><i data-lucide="layout-grid" size="14"></i> World Map</a>
-        <div class="os-status">HustlSmartAI • <span id="status-line">Node Active</span></div>
-    </nav>
+    <div id="app-container">
+        <!-- Lesson Engine -->
+        <div id="lesson-engine">
+            <header>
+                <a href="#" class="back-link" onclick="history.back()"><i data-lucide="chevron-left"></i> Dashboard</a>
+                <div class="day-badge" id="day-display">Day 01</div>
+            </header>
 
-    <!-- Content Engine -->
-    <div id="lesson-engine" class="fade-in">
-        <span class="day-indicator" id="day-label">Day 01 • Course 1</span>
-        <h1 id="lesson-title">Neural Initialization</h1>
-        
-        <div class="skill-badge">
-            <i data-lucide="sparkles" size="14"></i> <span id="skill-label">+Skill Unlocked</span>
-        </div>
+            <span class="course-title" id="course-name-display">Loading Course...</span>
+            <h1 id="lesson-title">Loading Lesson...</h1>
 
-        <div class="mission-card">
-            <span class="section-label">Today's Mission</span>
-            <p class="mission-text" id="mission-label">Launch your AI operating system and commit to 30 days of growth.</p>
-        </div>
+            <div class="section-card">
+                <div class="label"><i data-lucide="target"></i> Today's Mission</div>
+                <p class="content-text" id="mission-text"></p>
+            </div>
 
-        <div class="content-block">
-            <span class="section-label">Learn</span>
-            <div class="learn-body" id="learn-label">
-                AI is not a tool; it is a new limb. You are not competing with AI; you are competing with those who refuse to use it.
+            <div class="section-card">
+                <div class="label"><i data-lucide="book-open"></i> Learn</div>
+                <p class="content-text" id="learn-text"></p>
+            </div>
+
+            <div class="section-card">
+                <div class="label"><i data-lucide="zap"></i> Do This Now</div>
+                <div class="content-text highlight-box" id="do-now-text"></div>
+            </div>
+
+            <div class="section-card">
+                <div class="label"><i data-lucide="award"></i> The Result</div>
+                <p class="content-text" id="result-text" style="font-weight: 600; color: var(--accent);"></p>
+            </div>
+
+            <div class="footer-nav">
+                <button class="btn btn-secondary" onclick="moveDay(-1)"><i data-lucide="arrow-left"></i></button>
+                <button class="btn btn-primary" onclick="markDone()">Mark as Done & Next <i data-lucide="check-circle"></i></button>
             </div>
         </div>
 
-        <div class="do-now-card">
-            <h3><i data-lucide="target" size="16"></i> Do This Now</h3>
-            <div class="learn-body" id="do-now-label">
-                Download ChatGPT and type your first prompt: "Who am I in the age of AI?"
-            </div>
-            <div class="result-line">
-                <i data-lucide="trending-up" size="16"></i>
-                <span id="result-label">You just shifted from spectator to operator.</span>
-            </div>
+        <!-- Error View -->
+        <div id="error-screen">
+            <i data-lucide="alert-circle" size="48"></i>
+            <h2>Mission Not Found</h2>
+            <p style="color: var(--text-dim); margin-top: 10px;">This node is locked or invalid.</p>
+            <br>
+            <a href="/" class="btn btn-primary" style="text-decoration: none;">Go to Dashboard</a>
         </div>
     </div>
 
-    <!-- 404 View -->
-    <div id="not-found">
-        <i data-lucide="alert-circle" class="error-icon" size="64"></i>
-        <h1>Mission Not Found</h1>
-        <p style="color: var(--text-dim); margin-bottom: 30px;">This sector of the neural map is currently offline.</p>
-        <a href="index.html" class="action-btn" style="text-decoration: none;">Return to Safety</a>
-    </div>
-
-    <!-- HUD -->
-    <div class="os-hud">
-        <div class="hud-stats">
-            <div class="stat-group">
-                <span>XP Progress</span>
-                <b id="xp-label">+100 XP</b>
-            </div>
-            <div class="stat-group" style="text-align: right;">
-                <span>Confidence Boost</span>
-                <b id="conf-label">0%</b><div class="conf-meter"><div class="conf-fill" id="conf-fill" style="width: 0%"></div></div>
-            </div>
-        </div>
-        <div class="xp-container">
-            <div class="xp-fill" id="progress-fill"></div>
-        </div>
-        <button class="action-btn" id="done-btn" onclick="completeDay()">
-            <span>Mark as Done</span> <i data-lucide="chevron-right" size="18"></i>
-        </button>
-    </div>
-</div>
-
-<script>
-    /**
-     * HUSTLSMARTAI - NEURAL DATA ENGINE
-     * All 60 Days of Professional-Level Content
-     */
-    const COURSES = {
-        1: {
-            name: "Foundations → First Money",
-            days: {
-                1: {
-                    title: "The AI Intern",
-                    mission: "Hire your first 24/7 AI employee for free.",
-                    learn: "Stop thinking of AI as a 'bot'. It is a world-class intern with an IQ of 150. It knows everything but needs clear orders. You are now a Manager.",
-                    doNow: "Ask ChatGPT: 'Explain Prompt Engineering like I'm a 5-year-old using only cricket metaphors.'",
-                    realWorldResult: "You just delegated a complex task in 3 seconds.",
-                    skillUnlocked: "+AI Delegation",
-                    xp: 100, progressPercent: 3, confidenceBoost: 10,
-                    statusLine: "Operator Mode: On"
-                },
-                2: {
-                    title: "The Prompt Framework",
-                    mission: "Master the 'Context-Task-Output' formula.",
-                    learn: "Bad prompts get bad results. Good prompts give Context (Who you are), Task (What you want), and Output (How you want it).",
-                    doNow: "Ask AI: 'Context: I'm a student. Task: Plan a 1-day AI study trip. Output: 3 bullet points.'",
-                    realWorldResult: "Structure found. Chaos eliminated.",
-                    skillUnlocked: "+Architecture",
-                    xp: 150, progressPercent: 6, confidenceBoost: 15,
-                    statusLine: "Neural Path Syncing"
-                },
-                3: {
-                    title: "The Persona Hack",
-                    mission: "Turn AI into a Harvard Business Consultant.",
-                    learn: "By telling AI who to 'Act As', you unlock deeper intelligence. If you say 'Act as a lawyer', the logic shifts to legal frameworks.",
-                    doNow: "Type: 'Act as a Startup Mentor. Roast my idea of selling AI-written resumes to my college peers.'",
-                    realWorldResult: "Expert logic applied instantly.",
-                    skillUnlocked: "+Persona Control",
-                    xp: 200, progressPercent: 10, confidenceBoost: 20,
-                    statusLine: "Logic Unlocked"
-                },
-                // Days 4-30 compressed for space, but logic follows same structure...
-                // (Generating a representative sample of key transition days)
-                7: {
-                    title: "The Viral Engine",
-                    mission: "Generate 10 viral hooks in 5 seconds.",
-                    learn: "Attention is the new currency. AI can analyze patterns in virality to write hooks that stop the scroll.",
-                    doNow: "Give AI a boring sentence like 'I like coffee' and ask for 5 viral hooks for Instagram.",
-                    realWorldResult: "Hook found. Engagement potential: High.",
-                    skillUnlocked: "+Hook Mastery",
-                    xp: 100, progressPercent: 23, confidenceBoost: 40,
-                    statusLine: "Ahead of 92% of users"
-                },
-                15: {
-                    title: "Service Discovery",
-                    mission: "Identify what people will actually pay you for.",
-                    learn: "People pay for speed. Resume writing, IG captions, and Email drafting are high-speed AI tasks.",
-                    doNow: "List 5 friends who have bad Instagram bios. Ask AI to rewrite them for free as a demo.",
-                    realWorldResult: "Product-Market fit discovered.",
-                    skillUnlocked: "+Market Insight",
-                    xp: 250, progressPercent: 50, confidenceBoost: 60,
-                    statusLine: "Skill Monetization Active"
-                },
-                30: {
-                    title: "The First Invoice",
-                    mission: "Ship your first AI-powered result for ₹500.",
-                    learn: "Confidence comes from cash. Your first payment proves you are no longer just a student, but a professional operator.",
-                    doNow: "Deliver one AI-optimized resume or social media set. Ask for a testimonial.",
-                    realWorldResult: "First ₹500 earned. Cycle complete.",
-                    skillUnlocked: "+Closing",
-                    xp: 500, progressPercent: 100, confidenceBoost: 100,
-                    statusLine: "Mission 1: Accomplished"
-                }
+    <script>
+        // --- DATA ENGINE (60 Days) ---
+        const courseData = {
+            1: {
+                name: "AI Foundations",
+                days: {}
+            },
+            2: {
+                name: "AI for Business",
+                days: {}
             }
-        },
-        2: {
-            name: "Services for Businesses",
-            days: {
-                31: {
-                    title: "Business Problem Scanning",
-                    mission: "Identify 'Time-Leaks' in local businesses.",
-                    learn: "Businesses are messy. They lose money on slow emails and bad content. You are the doctor who fixes the leaks with AI.",
-                    doNow: "Visit a local shop's website. Find 3 things AI could improve (Chat, SEO, Content).",
-                    realWorldResult: "Opportunity mapped. No more guessing.",
-                    skillUnlocked: "+Audit Skills",
-                    xp: 100, progressPercent: 2, confidenceBoost: 10,
-                    statusLine: "Consultant mode initializing"
-                },
-                60: {
-                    title: "Agency Scale-up",
-                    mission: "Automate your own agency to earn while you sleep.",
-                    learn: "The ultimate goal is a system. Use AI to automate your outreach, invoicing, and fulfillment. You are now the CEO.",
-                    doNow: "Set up one automation that sends a weekly AI report to your clients.",
-                    realWorldResult: "Freedom unlocked. System stable.",
-                    skillUnlocked: "+CEO Mindset",
-                    xp: 1000, progressPercent: 100, confidenceBoost: 100,
-                    statusLine: "HustlSmart Master Level"
-                }
+        };
+
+        // Course 1 (1-30) Generator
+        for(let i=1; i<=30; i++) {
+            courseData[1].days[i] = {
+                title: [
+                    "The AI Mindset", "Stop Searching, Start Prompting", "Setting up ChatGPT", "The Perfect Prompt Formula", 
+                    "Tone and Style Hacks", "AI for Faster Learning", "Summarizing Everything", "Writing Professional Emails",
+                    "Perfect IG Captions", "Creating Resumes with AI", "Bio Writing Service", "LinkedIn Profile Boost",
+                    "AI for Content Ideas", "Personal Brand Strategy", "Creating Viral Hooks", "Selling on WhatsApp",
+                    "Finding Your First Customer", "Creating a Service Menu", "Handling Client Questions", "The Pricing Secret",
+                    "Sending Professional Quotes", "Building a Simple Portfolio", "Collecting Testimonials", "Cold Outreach via DM",
+                    "Handling Rejection", "The Art of the Upsell", "Managing 2 Clients", "Daily Workflow with AI",
+                    "Scaling Your Income", "Your First ₹500 Goal"
+                ][i-1] || "Leveling Up",
+                mission: `Day ${i} Mission: Master the skill of ${i < 10 ? 'prompting' : 'service delivery'}.`,
+                learn: i < 15 ? "AI is not Google. AI is a partner. If you give it specific instructions, it gives expert results." : "Money follows value. Use AI to save people time, and they will pay you for it.",
+                doNow: `Open ChatGPT and type: "Act as a ${i < 15 ? 'Mentor' : 'Client'}. Help me ${i < 15 ? 'understand prompt basics' : 'write a sales pitch'}."`,
+                result: `You are now ${i * 3}% closer to your first AI-powered income.`
+            };
+        }
+
+        // Course 2 (31-60) Generator
+        for(let i=31; i<=60; i++) {
+            courseData[2].days[i] = {
+                title: [
+                    "Business Problems 101", "Finding Local Shops", "The AI Audit", "Pitching to Cafe Owners",
+                    "Automating Customer Support", "AI for Lead Generation", "Pricing High-Ticket", "Cold Emailing Agencies",
+                    "The Scaling Mindset", "Building a Team with AI"
+                ][(i-31)%10] || "Advanced Systems",
+                mission: `Day ${i} Mission: Help a real business automate one boring task.`,
+                learn: "Businesses have 'time leaks'. Every hour an employee wastes on manual work is lost profit. You fix this.",
+                doNow: "Find a local business on Google Maps. Use AI to write a 1-page report on how they can use AI to grow.",
+                result: "Consultant status: Level " + (i - 30)
+            };
+        }
+
+        // --- CORE LOGIC ---
+        let currentCourse = 1;
+        let currentDay = 1;
+
+        function init() {
+            const params = new URLSearchParams(window.location.search);
+            currentCourse = parseInt(params.get('course')) || 1;
+            currentDay = parseInt(params.get('day')) || 1;
+
+            const course = courseData[currentCourse];
+            const lesson = course ? course.days[currentDay] : null;
+
+            if (lesson) {
+                document.getElementById('lesson-engine').style.display = 'block';
+                document.getElementById('error-screen').style.display = 'none';
+                
+                document.getElementById('day-display').innerText = `Day ${currentDay}`;
+                document.getElementById('course-name-display').innerText = course.name;
+                document.getElementById('lesson-title').innerText = lesson.title;
+                document.getElementById('mission-text').innerText = lesson.mission;
+                document.getElementById('learn-text').innerText = lesson.learn;
+                document.getElementById('do-now-text').innerText = lesson.doNow;
+                document.getElementById('result-text').innerText = lesson.result;
+            } else {
+                document.getElementById('lesson-engine').style.display = 'none';
+                document.getElementById('error-screen').style.display = 'block';
             }
+            lucide.createIcons();
         }
-    };
 
-    // Fill missing days with template to ensure no "TODOs"
-    function fillMissingDays() {
-        // Course 1 (1-30)
-        for (let i = 1; i <= 30; i++) {
-            if (!COURSES[1].days[i]) {
-                COURSES[1].days[i] = {
-                    title: `Operator Day ${i}`,
-                    mission: `Advance your neural mastery to level ${i}.`,
-                    learn: "Mastery is a product of consistency. By repeating these frameworks daily, your brain begins to see AI opportunities everywhere.",
-                    doNow: `Ask AI to summarize the most important news in the world today for an 18-year-old student.`,
-                    realWorldResult: "Intelligence gap closed.",
-                    skillUnlocked: "+Persistence",
-                    xp: 100, progressPercent: Math.round((i/30)*100), confidenceBoost: i*3,
-                    statusLine: `Phase ${Math.ceil(i/10)}: Optimization`
-                }
-            }
+        function markDone() {
+            // Save progress
+            localStorage.setItem(`hs_c${currentCourse}_d${currentDay}`, 'completed');
+            moveDay(1);
         }
-        // Course 2 (31-60)
-        for (let i = 31; i <= 60; i++) {
-            if (!COURSES[2].days[i]) {
-                COURSES[2].days[i] = {
-                    title: `Consultant Day ${i}`,
-                    mission: `Refine your business automation system ${i-30}.`,
-                    learn: "Businesses pay for certainty. Your job as a consultant is to provide certain outcomes using uncertain AI tools.",
-                    doNow: `Draft a cold outreach email to a business owner explaining the ROI of AI automation.`,
-                    realWorldResult: "Authority pipeline built.",
-                    skillUnlocked: "+Authority",
-                    xp: 200, progressPercent: Math.round(((i-30)/30)*100), confidenceBoost: i*1.5,
-                    statusLine: `Consultant Grade ${Math.ceil((i-30)/10)}`
-                }
-            }
-        }
-    }
 
-    fillMissingDays();
-
-    // --- OS Controller ---
-    let currentCourse = 1;
-    let currentDay = 1;
-
-    function initOS() {
-        const params = new URLSearchParams(window.location.search);
-        currentCourse = parseInt(params.get('course')) || 1;
-        currentDay = parseInt(params.get('day')) || 1;
-
-        const lesson = COURSES[currentCourse]?.days[currentDay];
-
-        if (lesson) {
-            renderLesson(lesson);
-        } else {
-            show404();
-        }
-        lucide.createIcons();
-    }
-
-    function renderLesson(data) {
-        document.getElementById('lesson-engine').style.display = 'block';
-        document.getElementById('not-found').style.display = 'none';
-
-        document.getElementById('day-label').innerText = `Day ${currentDay.toString().padStart(2, '0')} • Course ${currentCourse}`;
-        document.getElementById('lesson-title').innerText = data.title;
-        document.getElementById('mission-label').innerText = data.mission;
-        document.getElementById('learn-label').innerText = data.learn;
-        document.getElementById('do-now-label').innerText = data.doNow;
-        document.getElementById('result-label').innerText = data.realWorldResult;
-        document.getElementById('skill-label').innerText = data.skillUnlocked;
-        document.getElementById('status-line').innerText = data.statusLine;
-        document.getElementById('xp-label').innerText = `+${data.xp} XP`;
-        document.getElementById('conf-label').innerText = `${data.confidenceBoost}%`;
-        
-        // Progress UI
-        setTimeout(() => {
-            document.getElementById('progress-fill').style.width = `${data.progressPercent}%`;
-            document.getElementById('conf-fill').style.width = `${data.confidenceBoost}%`;
-        }, 100);
-
-        // Check if finished
-        if (data.progressPercent >= 100 && currentDay % 30 === 0) {
-            document.getElementById('done-btn').innerHTML = `<span>Finalize Course</span> <i data-lucide="award" size="18"></i>`;
-        }
-    }
-
-    function show404() {
-        document.getElementById('lesson-engine').style.display = 'none';
-        document.getElementById('not-found').style.display = 'block';
-        document.querySelector('.os-hud').style.display = 'none';
-    }
-
-    function completeDay() {
-        // Save to localStorage
-        const progressKey = `hustl_c${currentCourse}_d${currentDay}`;
-        localStorage.setItem(progressKey, 'completed');
-
-        // Dopamine Feedback
-        const btn = document.getElementById('done-btn');
-        btn.style.background = '#ccff00';
-        btn.innerHTML = `<span>Day Complete!</span> <i data-lucide="check" size="18"></i>`;
-
-        setTimeout(() => {
-            let nextDay = currentDay + 1;
-            let nextCourse = currentCourse;
-
-            // Handle Course Jumps
-            if (currentDay === 30 && currentCourse === 1) {
-                nextCourse = 2;
-                nextDay = 31;
-            } else if (currentDay === 60) {
-                alert("Neural Map Complete. You are now a Master Operator.");
-                window.location.href = "dashboard.html";
+        function moveDay(step) {
+            let nextDay = currentDay + step;
+            
+            // Boundary checks
+            if (currentCourse === 1 && nextDay > 30) {
+                alert("Course 1 Complete! Go back to select Course 2.");
                 return;
             }
+            if (currentCourse === 2 && nextDay > 60) {
+                alert("Course 2 Complete! You are a HustlMaster.");
+                return;
+            }
+            if (nextDay < 1) return;
 
-            window.location.href = `course.html?course=${nextCourse}&day=${nextDay}`;
-        }, 800);
-    }
+            window.location.href = `course.html?course=${currentCourse}&day=${nextDay}`;
+        }
 
-    // Initialize
-    initOS();
-</script>
+        // Initialize on load
+        window.onload = init;
+    </script>
+    <script src="hustlbot.js"></script>
 </body>
 </html>
